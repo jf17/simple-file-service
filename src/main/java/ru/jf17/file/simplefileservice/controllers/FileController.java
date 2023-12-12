@@ -60,7 +60,7 @@ public class FileController {
             summary = "upload-file",
             description = "Upload Single File")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = StorageService.class), mediaType = "multipart/form-data")}),
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = FileResponse.class), mediaType = "multipart/form-data")}),
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
     @PostMapping("/upload-file")
