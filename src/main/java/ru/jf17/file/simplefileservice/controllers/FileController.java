@@ -1,5 +1,11 @@
 package ru.jf17.file.simplefileservice.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Tag(name = "Main", description = "Main management APIs")
 @Controller
 public class FileController {
 
@@ -24,7 +31,7 @@ public class FileController {
         this.storageService = storageService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/admin")
     public String listAllFiles(Model model) {
 
         model.addAttribute("files", storageService.loadAll().map(
@@ -49,6 +56,13 @@ public class FileController {
                 .body(resource);
     }
 
+    @Operation(
+            summary = "upload-file",
+            description = "Upload Single File")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = StorageService.class), mediaType = "multipart/form-data")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
     @PostMapping("/upload-file")
     @ResponseBody
     public FileResponse uploadFile(@RequestParam("file") MultipartFile file) {
