@@ -1,10 +1,13 @@
-package ru.jf17.file.simplefileservice.storage;
+package ru.jf17.file.simplefileservice.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 
-@ConfigurationProperties(prefix = "storage")
+
+@Configuration
 public class StorageProperties {
 
+    @Value("${storage.location}")
     private String location;
 
     public String getLocation() {

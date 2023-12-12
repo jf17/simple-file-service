@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import ru.jf17.file.simplefileservice.config.StorageProperties;
 
 import java.io.IOException;
 import java.io.InputStream;
